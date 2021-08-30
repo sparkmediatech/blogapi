@@ -10,11 +10,7 @@ const bcrypt = require("bcrypt");
 //Create New Post
 //becus the user will create post into the database, we are using .post method
 router.post("/", async (req, res) =>{
-   const newPost = new Post(req.body,
-    {
-        department: await User.findOne({username: req.body.username})
-    }
-    );//we called the Post model we created and we used req.body
+   const newPost = new Post(req.body );//we called the Post model we created and we used req.body
     
     
   
@@ -94,7 +90,7 @@ router.get("/:id", async(req, res)=>{
     try{
         const post = await Post.findById(req.params.id );
         
-       // populate(' username', 'username').exec()// comment this line out and save, refresh the single page and see that it fetches. But once this code is on, it wont fetch
+      
           
         res.status(200).json(post)
 
