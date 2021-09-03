@@ -1,12 +1,13 @@
 //creating the user models for the database
 
 const mongoose = require("mongoose"); //import mongoose to be used
+const Schema = mongoose.Schema;
 
 const CategorySchema = new mongoose.Schema(
     {
-       name:{
-           type: String,
-           require: true,
+       catname:{
+           type: String, 
+            required: false,
        }
        
 }, {timestamps: true}

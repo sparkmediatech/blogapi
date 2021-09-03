@@ -19,14 +19,13 @@ const PostSchema = new mongoose.Schema(
             type: String,
             required:false,
         },
-        username:{
-            type: String,
-            required: true,
-            unique: true
+       username:{
+            type: Schema.Types.ObjectId, 
+            ref: 'User'
         },
         categories:{
-            type: Array,
-            required: false
+           type: Schema.Types.ObjectId, 
+            ref: 'Category"'
             
         },
        

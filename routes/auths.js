@@ -26,6 +26,7 @@ router.post("/register", async(req, res) =>{
                                     
         //we created a variable called newUser and we declared the User model we created. we are looking for username, email and password from that model
         const newUser = new User({
+          
             username: req.body.username,
             email: req.body.email,
             password: hashedPass //the hashedPass variable we declared and got from bcrypt is now our new password variable.

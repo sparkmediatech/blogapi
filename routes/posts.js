@@ -36,7 +36,8 @@ router.put("/:id", async (req, res) =>{
         const post = await Post.findById(req.params.id);
          if(post.username == req.body.username ){//we looked for the post by ensuring that the username from the Post model matches the username
             try{
-                    const updatedPost = await Post.findByIdAndUpdate(req.params.id, {//inbuilt method used to find by id and update
+                    const updatedPost = await Post.findByIdAndUpdate(req.params.id, {//inbuilt method used to find by id and 
+                        
                         $set: req.body
                     }, {new: true})//this makes it possible to see the updated post
                          
@@ -62,8 +63,10 @@ router.delete("/:id", async (req, res) =>{
     //find post that will be updated
 
     try{
-        const post = await Post.findById(req.params.id);
-         if(post.username === req.body.username ){//we looked for the post by ensuring that the username from the Post model matches the username
+        const post = await Post.findById(req.params.id)
+         console.log(req.body.username)
+          console.log(post.username)
+         if(post.username == req.body.username ){//we looked for the post by ensuring that the username from the Post model matches the username
             try{
                     await post.delete();
                       
@@ -80,7 +83,7 @@ router.delete("/:id", async (req, res) =>{
     }catch(err){
         res.status(500).json(err)
     }
-  
+ 
 });
 
 
@@ -88,10 +91,13 @@ router.delete("/:id", async (req, res) =>{
 //Get Post
 router.get("/:id", async(req, res)=>{
     try{
-        const post = await Post.findById(req.params.id );
+        const post = await Post.findById(req.params.id).populate('username').populate(' categories')
+         
+       
         
-      
-          
+        //const post = await Post.findById(req.params.id );
+        
+     
         res.status(200).json(post)
 
     }catch(err){
@@ -102,9 +108,11 @@ router.get("/:id", async(req, res)=>{
 //GET ALL Posts logic
 
 router.get("/", async(req, res)=>{
+    
     const username = req.query.user;//req.querry is inbuilt. The last word .user is the keyword that will be used to querry your logic
     const catName = req.query.cat;
-
+    
+console.log(username)
     try{
        let posts;
        if(username){

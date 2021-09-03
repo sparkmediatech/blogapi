@@ -31,13 +31,7 @@ router.put("/:id", async (req, res) =>{
         } catch(err){
         res.status(500).json(err) //this handles the error if there is one from the server
         }
-        /*try{
-            const updatedPost = await Post.findByIdAndUpdate(req.params.id, {
-                $set: req.body,
-            }, {new: true})
-        }catch(err){
-            console.log(err)
-        }*/
+        
    } else{
        res.status(401).json("You can only update your account!")
    }
