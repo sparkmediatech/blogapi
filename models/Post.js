@@ -9,7 +9,8 @@ const PostSchema = new mongoose.Schema(
         title:{
             type: String,
             required: true,
-            unique: true
+            unique: true,
+           
         },
         description:{
             type: String,
@@ -24,12 +25,15 @@ const PostSchema = new mongoose.Schema(
             ref: 'User'
         },
         categories:{
-           type: Schema.Types.ObjectId, 
-            ref: 'Category"'
-            
+           type: Array,
         },
+       comments: [{
+             type: mongoose.Schema.Types.ObjectId,
+             ref: 'Comment'
+           }]
        
-}, {timestamps: true}
+}, {timestamps: true},
+
 );
 //exporting this schema
 module.exports = mongoose.model("Post", PostSchema); //the module name is "Post"

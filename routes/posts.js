@@ -3,17 +3,31 @@ const router = require("express").Router() //we declared the router variable fro
 const User = require("../models/User"); //the user model imported to be used
 const Post = require("../models/Post");
 const bcrypt = require("bcrypt");
+const Category = require("../models/Category");
 
 
 
 
 //Create New Post
 //becus the user will create post into the database, we are using .post method
+
+/*router.post("/", async (req, res) =>{
+    try{
+     
+        const newPost = new Post(req.body);//we called the Post model we created and we used req.body
+        newPost.categories.push(req.body.categories);
+        const savedPost = await newPost.save()//we tried to save the post created
+      
+        
+        res.status(200).json(savedPost)
+    }catch(err){
+       res.status(500).json(err)
+   }
+   
+});*/
+
 router.post("/", async (req, res) =>{
    const newPost = new Post(req.body );//we called the Post model we created and we used req.body
-    
-    
-  
 
    try{
         const savedPost = await newPost.save()//we tried to save the post created
@@ -24,7 +38,9 @@ router.post("/", async (req, res) =>{
        res.status(500).json(err)
    }
    
-});
+}); 
+
+
 
 //Update post
 //becus user will be updated something that is already created, we used put method
@@ -91,7 +107,13 @@ router.delete("/:id", async (req, res) =>{
 //Get Post
 router.get("/:id", async(req, res)=>{
     try{
-        const post = await Post.findById(req.params.id).populate('username').populate(' categories')
+        const post = await Post.findById(req.params.id).populate('username').populate({
+      path: "comments",
+      populate: {
+         path: "username",
+         
+      }
+   })
          
        
         
@@ -120,9 +142,10 @@ console.log(username)
           
        }
        else if(catName){
-            posts = await Post.find({categories:{
+            posts = await Post.find({categories: catName})
+            /*{
                 $in:[catName]
-            }})
+           }})*/
        }
 
        else{

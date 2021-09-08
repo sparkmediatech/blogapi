@@ -46,7 +46,7 @@ router.delete("/:id", async (req, res) =>{
         try{
             const user = await User.findById(req.params.id)//get the user and assign it to user variable
             try{
-                await Post.deleteMany({username: user.username})//deleting user posts once the username matches with the variable user object .username
+                await Post.deleteMany({username: user._id})//deleting user posts once the username matches with the variable user object .username
                 await User.findByIdAndDelete(req.params.id)//delete the user
                 res.status(200).json("User has been deleted")
             } catch(err){

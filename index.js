@@ -6,9 +6,13 @@ const mongoose = require("mongoose");
 const authRoute = require("./routes/auths")// declared a variable called authrouth pointing to auth js file created in the routes folder
 const userRoute = require('./routes/users');
 const postRoute = require('./routes/posts');
+const commentRoute = require("./routes/comment")
+
 const categoriesRoute = require('./routes/categories');
+
 const multer = require("multer");
 const path = require("path")//imported a library that enables the image folder to be visible to the public
+
 
 
 
@@ -51,6 +55,9 @@ app.use("/api/auth", authRoute);
 app.use("/api/users",userRoute);
 app.use("/api/posts",postRoute);
 app.use("/api/category",categoriesRoute);
+app.use("/api", commentRoute)
+
+
 
 app.listen("5000", () => {
     console.log("Backend is running"); //to run this application, I need to install node.js. we run npm init

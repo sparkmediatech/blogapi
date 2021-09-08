@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 const CategorySchema = new mongoose.Schema(
     {
        catname:{
-           type: String, 
+           type: Array, 
             required: false,
        }
        
